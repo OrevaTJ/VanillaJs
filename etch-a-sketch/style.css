@@ -1,0 +1,15 @@
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 384px;
+    height: 380px;
+}
+
+.boxes {
+    border: .5px solid black;
+    height: 20px;
+    width: 20px;
+    color: rgb(red, green, blue);
+}
