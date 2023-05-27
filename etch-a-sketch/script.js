@@ -22,13 +22,13 @@ function createSquares(grid) {
         container.appendChild(div);
     }
 }
-
-createSquares(defaultInput);
+// createSquares(defaultInput);
 
 
 // Clear button
 clear.addEventListener('click', e => {
     container.innerHTML = '';
+    location.reload()
 })
 
 
@@ -41,8 +41,6 @@ function randomColor() {
     return `rgb(${color.join(', ')})`
 }
 
-console.log(randomColor())
-
 // Change background color of squares
 function addEvent(colors) {
     container.addEventListener('mousedown', e => {
@@ -50,13 +48,17 @@ function addEvent(colors) {
             if (e.target && e.target.matches('.boxes')) {
                 e.target.style.backgroundColor = colors
             }
+        } else {
+            if (e.target && e.target.matches('.boxes')) {
+                e.target.style.backgroundColor = randomColor()
+            }
         }
     }) 
 }
-
-
 window.addEventListener('load', startup, false);
 function startup() {
+  createSquares(defaultInput);
+
   addEvent(colorInput.value)  
 
   colorInput.addEventListener('input', e => {
@@ -70,7 +72,6 @@ function startup() {
 
   randomMode.addEventListener('click', e => {
     e.target.value = ''
-    console.log(e.target.value)
     addEvent(e.target.value)
   })
 }
