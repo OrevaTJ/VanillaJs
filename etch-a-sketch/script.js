@@ -50,10 +50,6 @@ function addEvent(colors) {
             if (e.target && e.target.matches('.boxes')) {
                 e.target.style.backgroundColor = colors
             }
-        } else {
-            if (e.target && e.target.matches('.boxes')) {
-                e.target.style.backgroundColor = randomColor()
-            }
         }
     }) 
 }
