@@ -1,4 +1,4 @@
-const rangeInput = document.getElementById('input');
+const rangeInput = document.getElementById('range-input');
 const colorInput = document.getElementById('color-picker');
 const randomMode = document.getElementById('random-color')
 const eraser = document.getElementById('eraser')
@@ -6,12 +6,8 @@ const clear = document.getElementById('clear');
 const defaultInput = rangeInput.value;
 const defaultColor = 'rgb(0, 0, 0)';
 const container = document.getElementById('container');
-console.log(defaultInput);
-console.log(colorInput.value);
 
-
-
-
+//Create square divs in container
 function createSquares(grid) {
     const gridSize = grid * grid;
     for (let i = 0; i < gridSize; i++) {
@@ -22,8 +18,6 @@ function createSquares(grid) {
         container.appendChild(div);
     }
 }
-// createSquares(defaultInput);
-
 
 // Clear button
 clear.addEventListener('click', e => {
@@ -48,7 +42,7 @@ function addEvent(colors) {
             if (e.target && e.target.matches('.boxes')) {
                 e.target.style.backgroundColor = colors
             }
-        } else {
+        } else {//empty string from randomMode to call randomColor()
             if (e.target && e.target.matches('.boxes')) {
                 e.target.style.backgroundColor = randomColor()
             }
@@ -57,12 +51,12 @@ function addEvent(colors) {
 }
 window.addEventListener('load', startup, false);
 function startup() {
-  createSquares(defaultInput);
+  createSquares(defaultInput);//Default 18*18 grid
 
-  addEvent(colorInput.value)  
+  addEvent(colorInput.value);//Default black color
 
   colorInput.addEventListener('input', e => {
-    addEvent(e.target.value)
+    addEvent(e.target.value);
   })
 
   eraser.addEventListener('click', e => {
