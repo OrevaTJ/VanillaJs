@@ -1,40 +1,43 @@
 let display = document.getElementById('input');
-let buttons = Array.from(document.querySelectorAll('#num-btn'));
+let numButtons = Array.from(document.querySelectorAll('#num-btn'));
 const addButton = document.getElementById('add');
-const equalButton = document.getElementById('equal');
+const equalToButton = document.getElementById('equal-to');
 const multButton = document.getElementById('multiply');
 const clearButton = document.getElementById('clear');
 const divideButton = document.getElementById('divide');
 const subButton = document.getElementById('sub');
 const opButton = Array.from(document.querySelectorAll('#operators'))
 
-let valueA = [];
-operator = '';
+let inputValue = []; //List of input values
+let operator = ''; //Check which operator is clicked
+let check = false //Check if an operator is clicked
+// display.value = 0
 
 //Operator functions
 function add() {
-    return valueA[0] + valueA[1]
+    return inputValue[0] + inputValue[1]
 }
 function multiply() {
-    return valueA[0] * valueA[1]
+    return inputValue[0] * inputValue[1]
 }
 function divide() {
-    return valueA[0] / valueA[1]
+    return inputValue[0] / inputValue[1]
 }
 function sub() {
-    return valueA[0] - valueA[1]
+    return inputValue[0] - inputValue[1]
 }
 
-function equal(op) {
-    console.log(op())
-    return op()
+
+function equalTo(operatorName) {
+    console.log(operatorName())
+    return operatorName()
 }
 
 function clear() {
-    return valueA = []
+    return inputValue = []
 }
 clearButton.addEventListener('click', () => {
-    display.value = 0;
+    display.value = '';
     clear()
 })
 
@@ -42,36 +45,46 @@ clearButton.addEventListener('click', () => {
 opButton.forEach(op => op.addEventListener('click', e => {
     operator = e.target.textContent
     world()
+    check = true
 }))
 
 
 //Event for each numbers
-buttons.forEach(btn => btn.addEventListener('click', e => {
-    display.value += e.target.textContent
-    // valueA.push(parseInt(e.target.textContent))
-    console.log(valueA)
+numButtons.forEach(btn => btn.addEventListener('click', e => {
+    if (check === false) {
+        display.value += e.target.textContent
+        // inputValue.push(parseInt(e.target.textContent))
+        console.log(inputValue)
+    } else if (check === true) { //Clear display for second input
+        display.value = e.target.textContent
+        check = false
+    }
+    // display.value += e.target.textContent
+    // // inputValue.push(parseInt(e.target.textContent))
+    // console.log(inputValue)
 }))
 
 function world() {
-    valueA.push(parseInt(display.value))
-    console.log(valueA)
+    inputValue.push(parseInt(display.value))
+    console.log(inputValue)
 }
 
-equalButton.addEventListener('click', () => {
+equalToButton.addEventListener('click', () => {
+    inputValue.push(parseInt(display.value))//Push second input to value list
     if (operator === '+') {
-        equal(add);
+        equalTo(add);
         display.value = add()
         clear()
     } else if (operator === '*') {
-        equal(multiply)
+        equalTo(multiply)
         display.value = multiply()
         clear()
     } else if (operator === '/') {
-        equal(divide)
+        equalTo(divide)
         display.value = divide()
         clear()
     } else if (operator === '-') {
-        equal(sub)
+        equalTo(sub)
         display.value = sub()
         clear()
     }
