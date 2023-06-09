@@ -1,17 +1,17 @@
-let container = document.getElementById('container')
+const container = document.getElementById('container');
 
 let gameBoard = ['box1', 'box2', 'box3', 'box4', 
             'box5', 'box6', 'box7', 'box8', 'box9'];
 
 const boxFactory = function(box) {
-    let boxDiv = document.createElement('div');
-    boxDiv.textContent = 'X';
-    boxDiv.classList.add('box', box);
-    boxDiv.setAttribute('id', box)
+    let gameButton = document.createElement('button');
+    gameButton.textContent = '';
+    gameButton.classList.add('box', box);
+    gameButton.setAttribute('id', box)
     const append = function() {
-        container.appendChild(boxDiv);
+        container.appendChild(gameButton);
     }
-    return { boxDiv, append };
+    return { gameButton, append };
 }
 
 for (let i = 0; i < gameBoard.length; i++) {
@@ -19,10 +19,45 @@ for (let i = 0; i < gameBoard.length; i++) {
     gameBoard[i].append();
 }
 
-// const fox1 = boxFactory()
-// fox1.append()
+const gamePlay = function() {
+    const players = [
+        {
+            name: 'Player One',
+            mark: 'X',
+        },
+        {
+            name: 'Player Two',
+            mark: 'O',
+        }
+    ];
 
-// for (let i = 0; i < gameBoard.length; i++) {
-//     gameBoard[i] = Person('jeff', 23)};
-// console.log(gameBoard[2])
+    let activePlayer = players[0];
+
+    const changePlayer = () => {
+        if(activePlayer === players[0]) {
+            activePlayer = players[1]
+            return
+        } else if(activePlayer === players[1]) {
+            activePlayer = players[0]
+        }
+    };
+
+    const getActivePlayer = () => {
+        return activePlayer
+    };
+
+    const playRound = (e) => {
+        if(e.target.textContent) return
+        e.target.textContent = getActivePlayer().mark 
+        console.log(getActivePlayer().mark);
+        changePlayer();
+    };
+
+    return { getActivePlayer, playRound }
+
+}();
+
+container.addEventListener('click', e => {
+    gamePlay.playRound(e)
+})
 
