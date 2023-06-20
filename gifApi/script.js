@@ -8,7 +8,12 @@ function getInput() {
     return input.value;
 }
 
+function clearErr() {
+    return p.textContent = ''
+}
+
 function fetchApi() {
+    clearErr()
     fetch(`https://api.giphy.com/v1/gifs/translate?api_key=dKCOEURFVuLXwRJ7OuJeOZ1TPUBKZojB&s=${getInput()}`, {mode: 'cors'})
     .then(function(response) {
         return response.json()
@@ -16,5 +21,9 @@ function fetchApi() {
     .then(function(response) {
     console.log(response.data.images.original.url)
     img.src = response.data.images.original.url
+    })
+    .catch(function(response) {
+        console.log(response)
+        p.textContent = 'Enter Keyword'
     })
 }
