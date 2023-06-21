@@ -12,18 +12,15 @@ function clearErr() {
     return p.textContent = ''
 }
 
-function fetchApi() {
-    clearErr()
-    fetch(`https://api.giphy.com/v1/gifs/translate?api_key=dKCOEURFVuLXwRJ7OuJeOZ1TPUBKZojB&s=${getInput()}`, {mode: 'cors'})
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(response) {
-    console.log(response.data.images.original.url)
-    img.src = response.data.images.original.url
-    })
-    .catch(function(response) {
-        console.log(response)
+async function fetchApi() {
+    try {
+        clearErr()
+        const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=dKCOEURFVuLXwRJ7OuJeOZ1TPUBKZojB&s=${getInput()}`, {mode: 'cors'})
+        const source = await response.json();
+        console.log(source)
+        img.src = source.data.images.original.url
+    } catch (error) {
+        console.log(error.message)
         p.textContent = 'Enter Keyword'
-    })
+    }
 }
