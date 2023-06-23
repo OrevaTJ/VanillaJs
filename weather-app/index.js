@@ -8,10 +8,13 @@ const temperatureF = document.getElementById('temp-f');
 const wind = document.getElementById('wind');
 const input = document.querySelector('input')
 const button = document.querySelector('button');
+const container = document.querySelector('.container');
+document.getElementById('year').innerHTML = new Date().getFullYear()
 
 
 async function domElements() {
-    const data = await getData()
+    const data = await getData();
+    container.style.display = 'block'
 
     console.log(data.current.condition.text)
     text.textContent = data.current.condition.text;

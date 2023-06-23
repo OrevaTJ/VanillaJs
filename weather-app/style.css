@@ -1,0 +1,84 @@
+*,
+::after, 
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Montserrat&display=swap');
+html {
+    font-size: 63.5%;
+    background: url('./images/img1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    height: 100vh;
+}
+
+.header {
+    font-family: 'Roboto', sans-serif;
+    height: 12rem;
+    color: #cbd5e1;
+    background: rgb(57, 58, 61);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(57, 58, 61);
+}
+
+.main {
+    font-family: 'Nunito', sans-serif;
+    height: 65vh;
+}
+
+.search-bar {
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+.search-bar input{
+    width: 14rem;
+    height: 2.5rem;
+}
+.search-bar button {
+    width: 5rem;
+    height: 2.5rem;
+}
+
+.container {
+    margin-top: 40px;
+    display: none;
+}
+.content {
+    font-size: 2rem;
+    color: #ffffff;
+    width: 70vw;
+    height: 35rem;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+}
+
+.footer {
+    background: rgb(57, 58, 61);
+    color: #cbd5e1;
+    margin-top: 6.7rem;
+    padding: 0.5rem 0;
+    height: 6rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.fa-brands {
+    color: #d0def0;
+}
