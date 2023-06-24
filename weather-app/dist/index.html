@@ -12,7 +12,7 @@
 </head>
 <body>
     <header class="header">
-        <h1>Weather App</h1>
+        <h1><span class="cloud">🌤</span>Weather App</h1>
     </header>
     <main class="main">
         <div class="search-bar">
@@ -21,19 +21,22 @@
         </div>
         <div class="container">
             <div class="content">
-                <div>
-                    <p id="name"></p>
-                    <p id="text"></p>
-                    <p id="date"></p>
-                </div>
-                <div>
-                    <p id="temp-c"></p>
-                    <p id="temp-f"></p>
-                </div>
-                <div>
-                    <p id="humidity"></p>
-                    <p id="feels"></p>
-                    <p id="wind"></p>
+                <p class="name" id="name"></p>
+                <div class="weather-details">
+                    <div>
+                        <p id="text"></p>
+                        <p id="date"></p>
+                    </div>
+                    <div>
+                        <p id="temp-c"></p>
+                        <p id="temp-f"></p>
+                    </div>
+                    <div>
+                        <p id="humidity"></p>
+                        <p id="feels"></p>
+                        <p id="wind"></p>
+                        <i class="fa-solid fa-droplet-degree"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,6 +51,6 @@
             </span>
         </p>
     </footer>
-    <script src="./index.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>
