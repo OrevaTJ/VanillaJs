@@ -1,14 +1,12 @@
 .container {
-    width: 400px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 
 }
 .container button {
-    width: 60px;
-    height: 60px;
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -17,4 +15,40 @@
 
 .box3 {
     background: red;
+}
+
+.overlay {
+    text-align: center;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    top: 20%;
+    left: 25%;
+    right: 25%;
+    height: 50%;
+    width: 50%;
+    margin: 0 auto;
+    background: rgb(0 0 0 / 0.9);
+    transform: scale(1);
+    border-radius: var(--borderRadius);
+}
+.overlay .btn {
+    font-size: 3rem;
+    width: 20rem;
+    font-weight: 500;
+    background: var(--black);
+}
+.overlay p {
+    font-size: 5rem;
+}
+
+.endgame {
+    display: none;
+}
+.face,
+.hand-shake {
+    display: none;
 }
