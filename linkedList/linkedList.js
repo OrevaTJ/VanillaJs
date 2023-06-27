@@ -1,9 +1,10 @@
 
-// Using classes
+//  Using classes
+
 class Node {
-    constructor(data, next=null) {
-        this.data = data;
-        this.next = next;
+    constructor(value, nextNode=null) {
+        this.value = value;
+        this.nextNode = nextNode;
     }
 }
 
@@ -13,22 +14,8 @@ class LinkedList {
         this.size = 0;
     }
 
-    insertFirst(data) {
-        this.head = new Node(data, this.head);
-        this.size++
-    }
-
-    listData() {
-        let current = this.head;
-
-        while(current) {
-            console.log(current.data);
-            current = current.next;
-        }
-    }
-
-    insertLast(data) {
-        let node = new Node(data);
+    append(value) {
+        let node = new Node(value);
         let current;
 
         if(!this.head) {
@@ -36,32 +23,162 @@ class LinkedList {
         } else {
             current = this.head;
 
-            while(current.next) {
-                current = current.next;
+            while(current.nextNode) {
+                current = current.nextNode;
             }
-            current.next = node
+            current.nextNode = node
         }
         this.size++
+    }
+
+    prepend(value) {
+        this.head = new Node(value, this.head);
+        this.size++
+    }
+
+
+    listSize() {
+        return this.size;
+    }
+
+    listHead() {
+        return this.head;
+    }
+
+    tail() {
+        let current = this.head
+
+        while(current.nextNode) {
+            current = current.nextNode;
+        }
+        return current  
+    }
+
+
+    getAt(index) {
+        let current = this.head;
+        let counter = 0;
+        if(index === 0) {
+            return current;
+        } else if(index >= this.size) {
+            return
+        } else {
+            while(counter < index) {
+                current = current.nextNode;
+                counter++
+            }
+
+            console.log(current)
+        }
+    }
+
+    pop() {
+        let current = this.head
+        let previous;
+
+        while(current.nextNode) {
+            previous = current
+            current = current.nextNode;
+        }
+        previous.nextNode = null
+        this.size--
+        return 
+    }
+
+
+    listValue() {
+        let current = this.head;
+
+        while(current) {
+            console.log(current.value);
+            current = current.nextNode;
+        }
+    }
+
+
+    insertAt(value, index) {
+        if(index > this.size) return;
+
+        if(index === 0) {
+            this.prepend(value);
+            return;
+        }
+
+        const node = new Node(value);
+        let previous, current;
+
+        current = this.head;
+        let count = 0;
+
+        while(count < index) {
+            previous = current;
+            count++
+            current = current.nextNode
+        }
+        previous.nextNode = node;
+        node.nextNode = current
+        this.size++
+    }
+
+
+    removeAt(index) {
+        let current = this.head;
+        let previous;
+        let count = 0;
+
+        if(index === 0) {
+            this.head = current.nextNode
+        } else if (index > this.size) {
+            return
+        } else {
+            while(count < index) {
+                previous = current;
+                count++;
+                current = current.nextNode
+            }
+            previous.nextNode = current.nextNode;
+        }
+        this.size--
+        return
+    }
+
+    toString() {
+        let current = this.head;
+        let str = '';
+        while(current != null) {
+            str += `( ${current.value} ) ->`
+            current = current.nextNode;
+        }
+        str += 'null';
+        return
+    }
+
+    clearList() {
+        this.head = null;
+        this.size = 0;
     }
 }
 
 
 const list = new LinkedList();
 
-list.insertFirst(100)
-list.insertFirst(200)
-list.insertFirst(300)
-list.insertLast(400)
+list.prepend(100)
+list.prepend(200)
+list.prepend(300)
+list.append(400)
 
 console.log(list)
-list.listData()
+list.listValue()
+
+////////////////////////////////////////////////
+////////  Using factory functions    ///////////
+///////////////////////////////////////////////
 
 
-// Using factory functions
-// function Node(data, next=null) {
+// function Node(value, nextNode=null) {
 //     return {
-//         data,
-//         next
+//         value,
+//         nextNode
 //     }
 // }
 
@@ -70,21 +187,8 @@ list.listData()
 //     let size = 0;
 
 //     return {
-//         insertFirst(data) {
-//             head = Node(data, head)
-//             size++
-//         },
-    
-//         listData() {
-//             let current = head;
-    
-//             while(current) {
-//                 console.log(current.data)
-//                 current = current.next;
-//             }
-//         },
 
-//         insertLast() {
+//         append() {
 //             let node = Node(400);
 //             let current;
 
@@ -93,22 +197,147 @@ list.listData()
 //             } else {
 //                 current = head;
 
-//                 while(current.next) {
-//                     current = current.next;
+//                 while(current.nextNode) {
+//                     current = current.nextNode;
 //                 }
-//                 current.next = node;
+//                 current.nextNode = node;
 //             }
 //             size++
-//         }
+//         },
+
+//         prepend(value) {
+//             head = Node(value, head)
+//             size++
+//         },
+
+//         listSize() {
+//             return size;
+//         },
+    
+//         listHead() {
+//             return head;
+//         },
+    
+//         tail() {
+//             let current = head
+    
+//             while(current.nextNode) {
+//                 current = current.nextNode;
+//             }
+//             return current  
+//         },
+    
+    
+//         getAt(index) {
+//             let current = head;
+//             let counter = 0;
+//             if(index === 0) {
+//                 return current;
+//             } else if(index >= size) {
+//                 return
+//             } else {
+//                 while(counter < index) {
+//                     current = current.nextNode;
+//                     counter++
+//                 }
+    
+//                 console.log(current)
+//             }
+//         },
+    
+//         pop() {
+//             let current = head
+//             let previous;
+    
+//             while(current.nextNode) {
+//                 previous = current
+//                 current = current.nextNode;
+//             }
+//             previous.nextNode = null
+//             size--
+//             return 
+//         },
+
+    
+//         listValue() {
+//             let current = head;
+    
+//             while(current) {
+//                 console.log(current.value)
+//                 current = current.nextNode;
+//             }
+//         },
+
+//         insertAt(value, index) {
+//             if(index > size) return;
+    
+//             if(index === 0) {
+//                 list.prepend(value);
+//                 return;
+//             }
+    
+//             const node = Node(value);
+//             let previous, current;
+    
+//             current = head;
+//             let count = 0;
+    
+//             while(count < index) {
+//                 previous = current;
+//                 count++
+//                 current = current.nextNode
+//             }
+//             previous.nextNode = node;
+//             node.nextNode = current
+//             size++
+//         },
+
+        
+//         removeAt(index) {
+//             let current = head;
+//             let previous;
+//             let count = 0;
+    
+//             if(index === 0) {
+//                 head = current.nextNode
+//             } else if (index > size) {
+//                 return
+//             } else {
+//                 while(count < index) {
+//                     previous = current;
+//                     count++;
+//                     current = current.nextNode
+//                 }
+//                 previous.nextNode = current.nextNode;
+//             }
+//             size--
+//             return
+//         },
+
+
+//         toString() {
+//             let current = head;
+//             let str = '';
+//             while(current != null) {
+//                 str += `( ${current.value} ) -> `
+//                 current = current.nextNode;
+//             }
+//             return (str += 'null');
+//         },
+
+//         clearList() {
+//             head = null;
+//             size = 0;
+//        }
 
 //     }
 // }
 
 // const list = linkedList();
 
-// list.insertFirst(100)
-// list.insertFirst(200)
-// list.insertFirst(300)
-// list.insertLast(400)
+// list.prepend(100)
+// list.prepend(200)
+// list.prepend(300)
+// list.append(400)
 
-// list.listData()
+// list.listValue()
