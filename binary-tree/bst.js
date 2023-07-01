@@ -1,14 +1,9 @@
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.left = null;
-        this.right = null;
-    }
-}
 
 class Tree {
     constructor(array=null) {
-        this.root = array;
+        removeDuplicate(array);
+        const n = array.length;
+        this.root = buildTree(array, 0, n-1);
     }
 
     insert(data) {
@@ -86,6 +81,98 @@ class Tree {
         return current
     }
 
+
+    levelOrder(node=this.root, queueList = [], printList = []) {
+        if (node.data === null) return;
+
+        queueList.push(node);
+
+        while(queueList.length) {
+            let temp = [];
+            let size = queueList.length
+            for(let i=0; i<size; i++) {
+                let current = queueList.shift();
+                temp.push(current.data);
+                if(current.left) {
+                    queueList.push(current.left)
+                }
+                if(current.right) {
+                    queueList.push(current.right)
+                }
+            }
+            
+            printList.push(temp);
+        }
+
+        return printList;
+    }
+
+
+    inOrderTraversal(node = this.root) {
+        let printList = [];
+        inOrder(node)
+        function inOrder(node) {
+            if(!node) return null;
+
+            inOrder(node.left);
+            printList.push(node.data);
+            inOrder(node.right);
+        }
+        return printList
+    }
+
+
+    
+    preOrderTraversal(node = this.root) {
+        let printList = [];
+        inOrder(node)
+        function inOrder(node) {
+            if(!node) return null;
+
+            printList.push(node.data);
+            inOrder(node.left);
+            inOrder(node.right);
+        }
+        return printList
+    }
+
+
+    
+    postOrderTraversal(node = this.root) {
+        let printList = [];
+        inOrder(node)
+        function inOrder(node) {
+            if(!node) return null;
+
+            inOrder(node.left);
+            inOrder(node.right);
+            printList.push(node.data);
+        }
+        return printList
+    }
+
+
+    height(node=this.root) {
+        if(node === null) return 0;
+
+        const x = this.height(node.left);
+        const y = this.height(node.right);
+        
+        return Math.max(x, y) + 1;
+    }
+
+
+    depth(data, node=this.root, count=0) {
+        if(!data) return;
+        if(data === node.data) return count;
+        if(data < node.data) {
+            return this.depth(data, node.left, count + 1)
+        } else {
+            return this.depth(data, node.right, count + 1)
+        }
+    }
+
+
     
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
         if (node === null) {
@@ -101,10 +188,6 @@ class Tree {
     }
 }
 
-// console.log(tree.insert(60))
-// tree.insert(40)
-// tree.insert(70)
-// console.log(tree.prettyPrint())
 
 
 function buildTree(arr, start, end) {
@@ -121,50 +204,5 @@ function buildTree(arr, start, end) {
 }
 
 
-// Merge sort using recursion
 
-function merge(left, right) {
-    let sorted = [];
-
-    while (left.length && right.length) {
-        if(left[0] < right[0]) {
-            sorted.push(left.shift());
-        } else {
-            sorted.push(right.shift());
-        }
-    }
-
-    return [...sorted, ...left, ...right];
-}
-
-
-function mergeSort(array) {
-    if(array.length <= 1) return array;
-
-    let mid = Math.floor(array.length/2);
-
-    let left = mergeSort(array.slice(0, mid));
-    let right = mergeSort(array.slice(mid))
-
-    return merge(left, right)
-}
-
-function duplicate(arr) {
-    return [...new Set(arr)];
-}
-
-
-
-// let array = duplicate(mergeSort([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 
-//                     9, 67, 6345, 324]));
-// let n = array.length
-// console.log(array)
-// let rootNode = buildTree(array, 0, n-1);
-// console.log(rootNode.left)
-// const tree = new Tree(buildTree(array, 0, n-1));
-// console.log(tree)
-// console.log(tree.prettyPrint())
-
-
-
-
+module.exports = Tree;
